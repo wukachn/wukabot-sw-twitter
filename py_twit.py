@@ -28,4 +28,4 @@ while True:
 
 	api.update_status(status=tweet_text, media_ids=media_ids)
 
-	time.sleep(600)
+	time.sleep(TWEET_INTERVAL)
