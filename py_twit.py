@@ -1,5 +1,5 @@
 from os import environ
-import glob, random, tweepy
+import glob, random, tweepy, time
 
 def RandomSWChars(folder):
         file_path_type = [folder + "*.png"]
