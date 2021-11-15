@@ -1,7 +1,0 @@
-Implement twitter API + Web scraper for SW databank
-
-Web scraper uses official star wars databank
-https://www.starwars.com/databank. Saves character 'mugshots'
-as <char_name>.png files.
-
-Tweets posted using 'twython' package. 2 random characters.
