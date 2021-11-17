@@ -30,6 +30,9 @@ api = tweepy.API(auth)
 while True:
     # Add character images to the tweet
     sw_chars = RandomSWChars("sw_char/")
+    while (sw_chars[0]==sw_chars[1]):
+        sw_chars = RandomSWChars("sw_char/")
+        
     media_ids = [api.media_upload(i).media_id_string for i in sw_chars]
 
     # Extract character names from .png file names.
