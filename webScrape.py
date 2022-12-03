@@ -17,7 +17,7 @@ search_url = """https://www.starwars.com/databank/"""
 driver.get(search_url)
 
 # Filter to characters
-driver.find_elements_by_xpath("""//*[@id="ref-1-6"]/div[1]/div[2]/ul/li[2]/span""")[0].click()
+driver.find_elements(By.XPATH,"""/html/body/div[5]/div[1]/div[2]/div[2]/article/section[10]/div[1]/div[2]/ul/li[2]""")[0].click()
 
 i = 0
 exit = 0
@@ -31,9 +31,9 @@ while True:
     time.sleep(1.5)
     try:
         element = WebDriverWait(driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, """/html/body/div[5]/div[1]/div[2]/div[2]/article/section[7]/div[1]/div[4]/div/a/span[1]""")))
+            EC.element_to_be_clickable((By.XPATH, """/html/body/div[5]/div[1]/div[2]/div[2]/article/section[10]/div[1]/div[4]/div/a""")))
 
-        more = driver.find_elements_by_xpath("""/html/body/div[5]/div[1]/div[2]/div[2]/article/section[7]/div[1]/div[4]/div/a/span[1]""")
+        more = driver.find_elements("xpath","""/html/body/div[5]/div[1]/div[2]/div[2]/article/section[10]/div[1]/div[4]/div/a""")
         more[0].click()
     except:
         # 'Load More' not clickable
@@ -45,18 +45,18 @@ while True:
 
 # Get the character image and name for each character
 # Store image as '<character_name>.png' in the 'sw_char' folder
-for x in range(1, 836):
+for x in range(1, 923):
     try:
-        char = driver.find_elements_by_xpath("/html/body/div[5]/div[1]/div[2]/div[2]/article/section[7]/div[1]/div[3]/div/ul[2]/div[" + str(x) + "]/div/div/div/div/div[2]/div[2]/div/h3/a/span")
-
+        char = driver.find_elements(By.XPATH,"//*[@id=\"ref-1-9\"]/div[1]/div[3]/div/ul[2]/div[" + str(x) + "]/div/div/div/div/div[2]/div[2]/div/h3/a/span")
         # Get characters name
         for element in char:
             char_name = element.text
 
         # Get character image
-        char_img = driver.find_elements_by_xpath("/html/body/div[5]/div[1]/div[2]/div[2]/article/section[7]/div[1]/div[3]/div/ul[2]/div[" + str(x) + "]/div/div/div/div/div[1]/div/a/img")
+        char_img = driver.find_elements(By.XPATH,"//*[@id=\"ref-1-9\"]/div[1]/div[3]/div/ul[2]/div[" + str(x) + "]/div/div/div/div/div[1]/div/a/img")
         for img in char_img:
             src = img.get_attribute('src')
-            urllib.request.urlretrieve(src, "sw_char/" + char_name + ".png")
+            path = "sw_char/" + char_name + ".png"
+            urllib.request.urlretrieve(src, path)
     except:
         pass
