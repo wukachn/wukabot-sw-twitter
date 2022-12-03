@@ -1,1 +1,0 @@
-worker: python py_twit.py
