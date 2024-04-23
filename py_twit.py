@@ -12,18 +12,25 @@ def RandomSWChars(folder):
         return [random.choice(images), random.choice(images)]
 
 # Establishes credentials for twitter api access
-CONSUMER_KEY = environ['CONSUMER_KEY']
-CONSUMER_SECRET = environ['CONSUMER_SECRET']
-ACCESS_KEY = environ['ACCESS_KEY']
-ACCESS_SECRET = environ['ACCESS_SECRET']
+BEARER_TOKEN = environ['BEARER_TOKEN']
+API_KEY = environ['API_KEY']
+API_KEY_SECRET = environ['API_KEY_SECRET']
+ACCESS_TOKEN = environ['ACCESS_TOKEN']
+ACCESS_TOKEN_SECRET = environ['ACCESS_TOKEN_SECRET']
 
 # Interval between tweets, (60 * 30) = 30 minutes
 TWEET_INTERVAL = 60 * 30
 
-# Authorise twitter API connection
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+# V1 Auth
+auth = tweepy.auth.OAuthHandler(API_KEY, API_KEY_SECRET)
+auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
+
+# V2 Auth
+client = tweepy.Client(consumer_key=API_KEY,
+                       consumer_secret=API_KEY_SECRET,
+                       access_token=ACCESS_TOKEN,
+                       access_token_secret=ACCESS_TOKEN_SECRET)
 
 # Tweet a battle, scheduled with TWEET_INTERVAL
 while True:
@@ -40,7 +47,7 @@ while True:
 
     # Post tweet
     tweet_text = "STAR WARS DEATH BATTLE!\n" + sw_chars[0] + " VS " + sw_chars[1]
-    api.update_status(status=tweet_text, media_ids=media_ids)
+    client.create_tweet(text=tweet_text, media_ids=media_ids)
 
     # Wait specified amount of time, then repeat tweeting process
     time.sleep(TWEET_INTERVAL)
