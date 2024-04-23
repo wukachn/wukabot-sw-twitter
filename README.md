@@ -6,6 +6,6 @@ See @SW_Battle_Bot on Twitter/X: https://twitter.com/SW_Battle_Bot.
 
 ## Scripts
 
-`webScrape.py` gathers character images from https://www.starwars.com/databank. Every year I tend to refresh the character collection and fix this script (as databank updates often break it).
+`scrape.py` gathers character images from https://www.starwars.com/databank. Every year I tend to refresh the character collection and fix this script (as databank updates often break it).
 
-`py_twit.py` posts a tweet with two random Star Wars characters to battle it out (every 30 mins).
+`tweet.py` posts a tweet with two random Star Wars characters to battle it out (every 30 mins).
